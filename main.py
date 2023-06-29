@@ -15,7 +15,7 @@ youtube_api_service_name = 'youtube'
 youtube_api_version = 'v3'
 
 youtube = build(youtube_api_service_name, youtube_api_version, developerKey=google_api_key, static_discovery=False)
-channel_id = '@ListenIT_channel'
+channel_id = 'UC-hIuJj-G-5wuppUy4wQ33Q'
 
 # request = youtube.search().list(
 #   part='id',
@@ -61,20 +61,28 @@ def search(youtube, **kwargs):
 # channel_details = request.execute()
 
 @bot.message_handler(content_types=['text'])
+
 def get_text_message(message):
   
 # echo-func, that replies any message with similar message  
   # bot.send_message(message.from_user.id,'What do you mean by "'+message.text+'"?')
-  # response = search(youtube, q=message.text, maxResults=1)
-  # items = response.get("items")
-  # for item in items:
+  response = search(youtube, q=message.text, channelId=channel_id, maxResults=10)
+  items = response.get("items")
+  for item in items:
       # get the video ID
       # video_id = item["id"]["videoId"]
+      try:
+        kind = item['id']['kind']
+        if kind == 'youtube#video':
+          video_id = item['id']['videoId']
+      except KeyError:
+        print("error")
       # get the video details
-      # video_response = get_video_details(youtube, id=video_id)
+      video_response = get_video_details(youtube, id=video_id)
+      return video_response
     
 # checking youtube api data
-  bot.send_message(message.from_user.id,message.text) 
+  bot.send_message(message.from_user.id,get_text_message(message)) 
 
 keep_alive()#launching flask-server in separate stream
 bot.polling(non_stop=True, interval=0) #launching bot'

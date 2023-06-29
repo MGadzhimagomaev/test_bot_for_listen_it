@@ -693,6 +693,23 @@ optional = false
 python-versions = ">=3.7"
 
 [[package]]
+name = "tqdm"
+version = "4.65.0"
+description = "Fast, Extensible Progress Meter"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+colorama = {version = "*", markers = "platform_system == \"Windows\""}
+
+[package.extras]
+dev = ["py-make (>=0.1.0)", "twine", "wheel"]
+notebook = ["ipywidgets (>=6)"]
+slack = ["slack-sdk"]
+telegram = ["requests"]
+
+[[package]]
 name = "typing-extensions"
 version = "3.10.0.2"
 description = "Backported and Experimental Type Hints for Python 3.5+"
@@ -774,7 +791,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.10.0,<3.11"
-content-hash = "35c8524b65001356614c911edd9d8c7f2b74f7dd82fa997d49c2c0fa2b5faf4d"
+content-hash = "db750de55ba20a5c0cab108fe3c1eab4a463bdb3203b3b762b792cafc73a1ea2"
 
 [metadata.files]
 aiohttp = []
@@ -832,6 +849,7 @@ six = []
 telebot = []
 toml = []
 tomli = []
+tqdm = []
 typing-extensions = []
 ujson = []
 uritemplate = []
