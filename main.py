@@ -62,11 +62,13 @@ def search(youtube, **kwargs):
 
 @bot.message_handler(content_types=['text'])
 
-def get_text_message(message):
   
 # echo-func, that replies any message with similar message  
   # bot.send_message(message.from_user.id,'What do you mean by "'+message.text+'"?')
-  response = search(youtube, q=message.text, channelId=channel_id, maxResults=10)
+
+def get_text_message(message):
+  
+  response = search(youtube, q=message,       channelId=channel_id, maxResults=10)
   items = response.get("items")
   for item in items:
       # get the video ID
@@ -78,11 +80,12 @@ def get_text_message(message):
       except KeyError:
         print("error")
       # get the video details
-      video_response = get_video_details(youtube, id=video_id)
-      return video_response
+      # video_response = get_video_details(youtube, id=video_id)
+      # return video_response['items']  
+    
+  bot.send_message(message.from_user.id,get_video_details(youtube, id=video_id))
     
 # checking youtube api data
-  bot.send_message(message.from_user.id,get_text_message(message)) 
 
 keep_alive()#launching flask-server in separate stream
 bot.polling(non_stop=True, interval=0) #launching bot'
