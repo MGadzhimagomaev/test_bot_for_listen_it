@@ -677,6 +677,14 @@ pyTelegramBotAPI = "*"
 requests = "*"
 
 [[package]]
+name = "telegram"
+version = "0.0.1"
+description = "Telegram APIs"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "toml"
 version = "0.10.2"
 description = "Python Library for Tom's Obvious, Minimal Language"
@@ -791,7 +799,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.10.0,<3.11"
-content-hash = "db750de55ba20a5c0cab108fe3c1eab4a463bdb3203b3b762b792cafc73a1ea2"
+content-hash = "3821f8ea9f17444e270be88c6c99c5f2241f2d417b80c527b618c090073144fd"
 
 [metadata.files]
 aiohttp = []
@@ -847,6 +855,7 @@ rope = []
 rsa = []
 six = []
 telebot = []
+telegram = []
 toml = []
 tomli = []
 tqdm = []
