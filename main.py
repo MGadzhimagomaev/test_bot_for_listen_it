@@ -3,8 +3,6 @@ from background import keep_alive #importing function for operability
 import pip
 pip.main(['install', 'pytelegrambotapi'])
 import telebot
-# from telegram import ParseMode
-
 import time
 from youtube_video_link import get_best_matching_video_header, get_best_matching_video_link
 
@@ -16,7 +14,7 @@ def get_text_message(message):
   video_link = get_best_matching_video_link(message.text)
   video_header = get_best_matching_video_header(message.text)
   if video_header is None:
-    text = "Не найдено ни одного видео. \
+    text = "Не найдено ни одного видео.\
     Попробуйте уточнить поисковой запрос."
   else:
     text = '<a href="'+video_link+'">'+video_header+'</a>'

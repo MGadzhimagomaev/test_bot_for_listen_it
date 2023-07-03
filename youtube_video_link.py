@@ -56,8 +56,8 @@ def get_best_matching_video_link(msg):
             print("error")
 
         # get the video details
-        video_response = get_video_details(youtube, id=yt_video_id)['items']
-        yt_link = 'https://www.youtube.com/watch?v=' + video_response[0]['id']
-        
+        # video_response = get_video_details(youtube, id=yt_video_id)['items']
+        # yt_link = 'https://www.youtube.com/watch?v=' + video_response[0]['id']
+        yt_link = 'https://www.youtube.com/watch?v=' + yt_video_id
         return yt_link
 
