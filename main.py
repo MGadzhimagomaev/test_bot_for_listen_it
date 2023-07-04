@@ -9,13 +9,17 @@ from youtube_video_link import get_best_matching_video_header, get_best_matching
 bot = telebot.TeleBot('5627699899:AAFaLVlJZoIElsGb4YYDf_a55YEJ9WnN88w')
 
 @bot.message_handler(content_types=['text'])
+def welcome(message):
+  if message.text == '/start':
+    sent_msg = bot.send_message(message.chat.id, "Привет! Введи поисковой запрос.")
+  else:
+    find_yt_video(message) #Next message will call the name_handler function
 
-def get_text_message(message):
+def find_yt_video(message):
   video_link = get_best_matching_video_link(message.text)
   video_header = get_best_matching_video_header(message.text)
   if video_header is None:
-    text = "Не найдено ни одного видео.\
-    Попробуйте уточнить поисковой запрос."
+    text = "Не найдено ни одного видео. Попробуй уточнить поисковой запрос."
   else:
     text = '<a href="'+video_link+'">'+video_header+'</a>'
 
