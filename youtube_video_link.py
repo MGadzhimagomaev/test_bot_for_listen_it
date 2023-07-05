@@ -21,43 +21,22 @@ def search(youtube, **kwargs):
         **kwargs
     ).execute()
 
-
-def get_best_matching_video_header(msg):
-    response = search(youtube, q=msg, channelId=channel_id, maxResults=5)
+def get_best_matching_video_title_w_link(msg):
+    response = search(youtube, q=msg, channelId=channel_id, maxResults=10)
     items = response.get("items")
-  
+    yt_video_title_dict = {}
+
     for item in items:
         try:
             kind = item['id']['kind']
             if kind == 'youtube#video':
                 yt_video_id = item['id']['videoId']
+                # get the video details
+                yt_link = 'https://www.youtube.com/watch?v=' + yt_video_id
+                video_response = get_video_details(youtube, id=yt_video_id)['items']
+                yt_video_title = video_response[0]['snippet']['title']
+                yt_video_title_dict.update({yt_video_title: yt_link})
         except KeyError:
             print("error")
 
-        # get the video details
-        video_response = get_video_details(youtube, id=yt_video_id)['items']
-        yt_video_title = video_response[0]['snippet']['title']
-        
-        return yt_video_title
-
-
-def get_best_matching_video_link(msg):
-    response = search(youtube, q=msg, channelId=channel_id, maxResults=5)
-    items = response.get("items")
-    # msg = str(msg)
-    # yt_video_id = None
-  
-    for item in items:
-        try:
-            kind = item['id']['kind']
-            if kind == 'youtube#video':
-                yt_video_id = item['id']['videoId']
-        except KeyError:
-            print("error")
-
-        # get the video details
-        # video_response = get_video_details(youtube, id=yt_video_id)['items']
-        # yt_link = 'https://www.youtube.com/watch?v=' + video_response[0]['id']
-        yt_link = 'https://www.youtube.com/watch?v=' + yt_video_id
-        return yt_link
-
+    return yt_video_title_dict
