@@ -33,3 +33,7 @@ def find_yt_video(message):
 
 keep_alive()#launching flask-server in separate stream
 bot.polling(non_stop=True, interval=0) #launching bot'
+
+#TBD: 
+#menu
+#instructions for users
